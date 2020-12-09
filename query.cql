@@ -55,3 +55,15 @@ update employee_by_car_make set car_model='Truck' where car_make='BMW' and id=1;
 
 -- update with TTL
 update employee_by_car_make using TTL 60 set car_model='Truck' where car_make='BMW' and id=2;
+
+-- adding an extra column in existing table
+alter table employee_by_id add phone set<text>;
+
+-- update data for an employee / add phone no 
+update employee_by_id set phone={'1234', '5678'} where id=1;
+-- add more items in an existing set
+update employee_by_id set phone = phone + {'67890'} where id=1;
+-- remove items from an existing set
+update employee_by_id set phone = phone - {'67890'} where id=1;
+-- remove all items from an existing set
+update employee_by_id set phone = {} where id=1;
