@@ -41,3 +41,11 @@ insert into employee_by_car_make (car_make, id, car_model) values ('BMW', 1, 'Sp
 insert into employee_by_car_make (car_make, id, car_model) values ('BMW', 2, 'Sports Car');
 insert into employee_by_car_make (car_make, id, car_model) values ('Audi', 4, 'Truck');
 insert into employee_by_car_make (car_make, id, car_model) values ('Audi', 5, 'Hatchback');
+
+-- Notes --
+-- selecting just based on one partition key is not allowed.
+-- selecting only based on clustering column is not allowed.
+-- ordering always must be done based on the order of clusteting column.
+
+-- query to check when last time an item was modified in a column
+select car_make, car_model, writetime(car_model) from employee_by_car_make;
