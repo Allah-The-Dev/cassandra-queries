@@ -67,3 +67,11 @@ update employee_by_id set phone = phone + {'67890'} where id=1;
 update employee_by_id set phone = phone - {'67890'} where id=1;
 -- remove all items from an existing set
 update employee_by_id set phone = {} where id=1;
+
+-- query data based on a random column using `allow filtering` label
+select * from employee_by_id where name='John' allow filtering;
+
+-- query data based on a random column using secondary index
+-- create secondary index
+create index on employee_by_id (name);
+select * from employee_by_id where name='John';
