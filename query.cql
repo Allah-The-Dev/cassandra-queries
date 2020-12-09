@@ -49,3 +49,9 @@ insert into employee_by_car_make (car_make, id, car_model) values ('Audi', 5, 'H
 
 -- query to check when last time an item was modified in a column
 select car_make, car_model, writetime(car_model) from employee_by_car_make;
+
+-- update a single item in a table
+update employee_by_car_make set car_model='Truck' where car_make='BMW' and id=1;
+
+-- update with TTL
+update employee_by_car_make using TTL 60 set car_model='Truck' where car_make='BMW' and id=2;
