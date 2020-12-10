@@ -1,0 +1,8 @@
+ docker run --name cassandra `
+  -v  <volume path in machine>:/var/lib/cassandra `
+  -e USERNAME=cassandra `
+  -e PASSWORD=password `
+  -e CASSANDRA_CLUSTER_NAME=cas_cluster `
+  -p 7000:7000 `
+  -p 9042:9042 `
+  -d cassandra
