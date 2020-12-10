@@ -1,0 +1,24 @@
+Gossip protocol:
+    - nodes communicate with some of the cluster nodes, and share info
+
+Gossip protocol communication includes:
+    - Heartbeat state
+        - when the node started
+        - Timestamp: at what time this info was updated
+    - Application state: 
+        - status of node: Normal/Leaving/Joining
+        - DC
+        - Rack
+        - Schema
+        - Load: disk pressure
+        - Severity: I/O pressure
+
+How Gossip protocol works:
+    - One node send info about other nodes to it's peer nodes, which includes:
+        - Node's ip (of which info it have)
+        - Heartbeat
+        - Application state
+    - Second node compares it's info against info sent by first node, and if it sees that some of my 
+        - info is latest, 
+        - then it'll send the udpated info to node 1
+        - once node 1 update it's info/metadata it'll acknowledge that to node 2
