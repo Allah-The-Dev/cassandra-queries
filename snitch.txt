@@ -1,0 +1,18 @@
+Coordinator node - Node which gets client request, and coordinate with other nodes to get the info
+
+Snitch - snitch is responsible for understanding the topology of our cluster
+    - snitch keeps track of in which data center on which rack a particular node is
+    - snitch main job is to decide which node will be most responsible for a particular request
+
+Types of snitch
+    - Simple snitch:
+        - default snitch, it assumes that cluster have only a single node
+    - Property file snitch  
+        - every node maintains DC and rack info all other nodes
+    - Gossiping property file snitch    
+        - every node maintains info about only it's location of DC and rack
+        - cassandra then spreads this info to all other nodes using gossip protocol
+    - Dynamic snitch
+        - purpose of this is to monitor the performance of all other nodes
+        - this is turned on by default
+        - for maintaining consistency of data it uses checksum value against data received from other nodes
