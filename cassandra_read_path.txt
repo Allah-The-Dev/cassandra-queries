@@ -1,0 +1,14 @@
+- Reads data from memtable and SS tables and matches the timestamp of those data    
+    - and return the latest one, and in most cases memtable have the latest data
+
+- If memtable do not have data (byte address in memory of partition is used for this purpose)
+    - then it uses caching technique
+    - for caching it uses multiple phases of checks
+        - Bloom filter - this will tell if this SS table at all contains asked partition key
+        - Key cache - it'll maintain byte address of most frequently accessed partition keys
+        - Partition summary - when partition index grows to very large, it'll group those indexes to make it shorter
+        - Partiton index - it maintains byte address of partition keys
+        - SS table - this is the acutal data representation present in Disk
+
+- Row caching is disabled by default
+- Key and counter caching is enabled by default 
