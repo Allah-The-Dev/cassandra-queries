@@ -1,0 +1,17 @@
+- When ever a write request comes in, cassandra node will put data in 2 places:
+    - Memtable (RAM), it maintains data order based on clustering columns
+    - Commit log (Disk), it do not maintains any data order
+    - If RAM gets wiped out, commit log will re-create it
+
+- Once all writes are done, Memtable will flush data to SS table in Disk    
+    - and Memtable and Disk commit logs will be wiped out
+
+- Optmized Write path for spinning Disk
+    - Keep 2 separate Disk
+    - one for commit logs, which will continiously seek new data
+    - while second disk will just maintains the SS tables
+
+- Optimized write path for SSD
+    - both commit logs and SS tables are maintained in same disk
+    - SS tables are immutable, hence more and more no of SS tables keeps getting created
+    - and using compaction techniques, SS tables data gets merged to smaller no of SS tables
